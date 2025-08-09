@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAST Stroke Screening MVP</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; background: #f8f9fa; }
+    h1 { background: #007bff; color: white; padding: 10px; }
+    video, canvas { max-width: 100%; border: 1px solid #ccc; margin-top: 10px; }
+    #status { font-size: 1.2em; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>FAST Stroke Screening (Prototype)</h1>
+  <p><b>Note:</b> This is for educational purposes only. Not a medical diagnostic tool.</p>
+  <video id="video" autoplay playsinline></video>
+  <canvas id="output"></canvas>
+  <div id="status">Initializing camera...</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+  <script>
+    const videoElement = document.getElementById('video');
+    const canvasElement = document.getElementById('output');
+    const canvasCtx = canvasElement.getContext('2d');
+    const statusEl = document.getElementById('status');
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        videoElement.srcObject = stream;
+        statusEl.innerText = "Camera ready - detecting...";
+      })
+      .catch(err => {
+        statusEl.innerText = "Camera access denied.";
+        console.error(err);
+      });
+
+    // Placeholder: MediaPipe processing logic here
+    // In full version, add face asymmetry, arm drift, speech clarity detection
+  </script>
+</body>
+</html>
